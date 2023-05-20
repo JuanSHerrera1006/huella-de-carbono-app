@@ -1,0 +1,78 @@
+def integer_input(msg: str, a: int, b: int) -> int:
+    """Function to validate if a integer is within a range (a, b)
+    
+    Parameters
+    ----------
+        msg: str
+            Message to show in the prompt 
+        a: int
+            Min range value
+        b: int 
+            Max range value
+
+    Returns
+    -------
+        ans
+            Return the validate user input
+    """
+    while True:
+        try:
+            value = int(input(msg))
+            if value < a or value > b:
+                raise ValueError("Has ingresado un valor no valido ")
+            return value
+        except ValueError as e:
+            print(e)
+
+
+def real_input(msg: str, a: float, b: float) -> float:
+    """Function to validate if a real is within a range (a, b)
+    
+    Parameters
+    ----------
+        msg: str
+            Message to show in the prompt 
+        a: int
+            Min range value
+        b: int 
+            Max range value
+
+    Returns
+    -------
+        ans
+            Return the validate user input
+    """
+    while True:
+        try:
+            value = float(input(msg))
+            if value < a or value > b:
+                raise ValueError("Has ingresado un valor no valido")
+            return value
+        except ValueError as e:
+            print(e)
+    
+def char_input(msg: str, valid_options: list[str] = ["M", "F"]) -> str:
+    """Function to validate if a value is on a list
+    
+    Parameters
+    ----------
+        msg: str
+            Message to show in the prompt 
+        valid_options: list[str]
+            List the valid elements
+            DEFAULT: ["M", "F"]
+
+    Returns
+    -------
+        ans
+            Return the validate user input
+    """
+    while True:
+        try:
+            value = input(msg).upper()
+            if value in valid_options:
+                return value
+            raise ValueError("Has elegido una opcion no valida")
+        except ValueError as e:
+            print(e)
+
