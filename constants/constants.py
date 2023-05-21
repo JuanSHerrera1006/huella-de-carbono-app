@@ -1,6 +1,9 @@
 # Database name
 DB_NAME = "./co2_emmissions.db"
 
+#Filetypes
+IMAGES_FILETYPES = [("Archivos de imagenes", ".jpeg .jpg .png")]
+
 # Header food table
 HEADER_FOOD_TABLE = ("id", "nombre", "co2_emmission", "create_at")
 
@@ -39,6 +42,17 @@ CREATE TABLE IF NOT EXISTS record(
     FOREIGN KEY(id_user) REFERENCES user(reference),
     PRIMARY KEY(id_food, id_user)
     );
+"""
+
+CREATE_IMAGE_TABLE = """
+CREATE TABLE IF NOT EXISTS image(
+    id_food INTEGER NOT NULL,
+    image BLOB NOT NULL,
+    name TEXT NOT NULL,
+    format TEXT NOT NULL,
+    FOREIGN KEY(id_food) REFERENCES food(id),
+    PRIMARY KEY(id_food)
+)
 """
 
 # Query to get all foods
