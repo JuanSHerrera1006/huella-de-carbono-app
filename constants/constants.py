@@ -52,16 +52,28 @@ CREATE TABLE IF NOT EXISTS image(
     format TEXT NOT NULL,
     FOREIGN KEY(id_food) REFERENCES food(id),
     PRIMARY KEY(id_food)
-)
+);
 """
 
 # Query to get all foods
-GET_ALL_FOODS = "SELECT * FROM food"
+GET_ALL_FOODS = "SELECT * FROM food ORDER BY id ASC;"
 
 # Query to get all users
-GET_ALL_USERS = "SELECT * FROM user"
+GET_ALL_USERS = "SELECT * FROM user ORDER BY reference ASC;"
+
+# Query to delete user
+DEL_USER_BY_ID = "DELETE FROM user WHERE reference = ?"
+
+# Query to get user by id
+GET_USER_BY_ID = "SELECT * FROM user WHERE reference = ?"
 
 # Query to insert a food in the table "food"
-INSERT_FOOD = "INSERT INTO food(name, co2_emmission) VALUES (?, ?)" 
+INSERT_FOOD = "INSERT INTO food(name, co2_emmission) VALUES (?, ?);" 
 
+# Query to insert a user in the table "user"
+INSERT_USER = """
+INSERT INTO user(reference, name, gender, place_of_birth, place_of_residence)
+VALUES
+(?, ?, ?, ?, ?);
+"""
 

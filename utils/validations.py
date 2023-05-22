@@ -12,7 +12,7 @@ def integer_input(msg: str, a: int, b: int) -> int:
 
     Returns
     -------
-        ans
+        ans: int
             Return the validate user input
     """
     while True:
@@ -39,7 +39,7 @@ def real_input(msg: str, a: float, b: float) -> float:
 
     Returns
     -------
-        ans
+        ans: float
             Return the validate user input
     """
     while True:
@@ -64,7 +64,7 @@ def char_input(msg: str, valid_options: list[str] = ["M", "F"]) -> str:
 
     Returns
     -------
-        ans
+        ans: str
             Return the validate user input
     """
     while True:
@@ -76,3 +76,24 @@ def char_input(msg: str, valid_options: list[str] = ["M", "F"]) -> str:
         except ValueError as e:
             print(e)
 
+def numeric_input(msg: str) -> str:
+    """Function to check if a value is numeric
+
+    Parameters
+    ----------
+        msg: str
+            Message to show in the prompt 
+
+    Returns
+    -------
+        ans: str
+            Return the validate user input
+    """ 
+    while True:
+        try:
+            value = input(msg)
+            if value.isnumeric():
+                return value
+            raise ValueError("Has digitado un numero de identificacion no valido (solo numerico)")
+        except ValueError as e:
+            print(e)

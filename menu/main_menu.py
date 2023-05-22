@@ -1,3 +1,5 @@
+import menu.user_menu as user_menu
+
 def menu() -> None:
     """App main menu
     
@@ -9,7 +11,7 @@ def menu() -> None:
     MENU_PROMPT = """--- MENU PRINCIPAL ---
     Opciones:
 
-    1) Option 1
+    1) Usuarios
     2) Option 2
     3) Option 3
     4) Option 4
@@ -19,7 +21,7 @@ def menu() -> None:
 
     while (userInput := input(MENU_PROMPT)) != '5':
         if userInput == '1':
-            pass
+            user_menu.menu()
         elif userInput == '2':
             pass
         elif userInput == '3':
@@ -28,4 +30,3 @@ def menu() -> None:
             pass
         else:
             print('Has ingresado una opcion no valida')
-

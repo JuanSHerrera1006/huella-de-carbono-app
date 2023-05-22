@@ -2,7 +2,7 @@ from utils.path import get_root_dir
 import os
 import csv
 
-def create_csv(filename: str, header: tuple, data: tuple) -> None:
+def create_csv(filename: str, header: tuple, data: list) -> None:
     """Create csv document in the path: "ROOT_DIR\\csv_data\\filename.csv" of the project
 
     Parameters
@@ -11,7 +11,7 @@ def create_csv(filename: str, header: tuple, data: tuple) -> None:
             The name of the file to save in the path. The name should have ".csv" in the finish
         header: tuple
             The header of the csv file
-        data: tuple
+        data: list
             The data of the csv file
 
     Returns

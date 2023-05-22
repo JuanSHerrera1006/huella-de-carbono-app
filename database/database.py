@@ -27,7 +27,8 @@ def create_tables(connection : Connection) -> None:
         tables_sql = (
             constants.CREATE_FOOD_TABLE,          
             constants.CREATE_USER_TABLE, 
-            constants.CREATE_USERXFOOD_TABLE
+            constants.CREATE_USERXFOOD_TABLE,
+            constants.CREATE_IMAGE_TABLE
         )
         for query in tables_sql:
             connection.execute(query)

@@ -1,16 +1,14 @@
 import database.database as database
-import menu.menu as menu
-import utils.images as images_functions
+import menu.main_menu as menu
 
 def main():
     conn = database.create_connection()
+    # Create tables
     database.create_tables(conn)
-    a, b = images_functions.image2blob()
-    file_name = 'cat' + a 
-    img = images_functions.blob2image(b)
-    images_functions.save_image(img, file_name)
-
-
+    # Close connection
+    conn.close()
+    # Start main menu
+    menu.menu()
 
 if __name__ == '__main__':
     main()
