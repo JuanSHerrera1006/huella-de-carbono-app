@@ -16,7 +16,9 @@ __pycache__/
 *.csv
 
 # Images 
-assets/images/*
+assets/images/*.jpg
+assets/images/*.jpeg
+assets/images/*.png
 
 # Distribution / packaging
 .Python
