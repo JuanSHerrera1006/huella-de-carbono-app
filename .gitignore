@@ -9,6 +9,12 @@ __pycache__/
 # Sqlite extensions
 *.db
 
+# SQL extensions
+*.sql
+
+# CSV extensions
+*.csv
+
 # Distribution / packaging
 .Python
 build/

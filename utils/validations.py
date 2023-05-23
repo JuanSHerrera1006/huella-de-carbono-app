@@ -1,4 +1,4 @@
-def integer_input(msg: str, a: int, b: int) -> int:
+def integer_input(msg: str, a: int, b: float) -> int:
     """Function to validate if a integer is within a range (a, b)
     
     Parameters
