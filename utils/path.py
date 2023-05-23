@@ -1,6 +1,6 @@
 import os
 
-def get_root_dir() -> str:
+def get_root_dir():
     """Get the root path project
     
     Returns

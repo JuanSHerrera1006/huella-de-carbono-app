@@ -1,9 +1,6 @@
 import constants.constants as constants
-from sqlite3 import Connection
-from typing import Any
 
-
-def get_all_foods(connection : Connection) -> list[Any]:
+def get_all_foods(connection):
     """Get all the foods registered in the database
 
     Parameters
@@ -25,7 +22,7 @@ def get_all_foods(connection : Connection) -> list[Any]:
             print(e)
     return foods
 
-def get_img_food_by_id(connection : Connection, id_food : int, only_meta_data : bool = True) -> list[Any]:
+def get_img_food_by_id(connection, id_food, only_meta_data=True):
     """Get all the foods registered in the database
 
     Parameters
@@ -51,7 +48,7 @@ def get_img_food_by_id(connection : Connection, id_food : int, only_meta_data : 
     return image
 
 
-def add_food(connection : Connection, name: str, co2_emmission: float) -> int | None:
+def add_food(connection, name, co2_emmission):
     """Insert a new register in the table "food"
 
     Parameters
@@ -84,7 +81,7 @@ def add_food(connection : Connection, name: str, co2_emmission: float) -> int | 
         except ValueError as e:
             print(e)
 
-def add_food_img(connection : Connection, id_food: int | None, image: bytes, name: str, format_img: str) -> None:
+def add_food_img(connection, id_food, image, name, format_img):
     """Insert a new register in the table "food"
 
     Parameters
@@ -115,7 +112,7 @@ def add_food_img(connection : Connection, id_food: int | None, image: bytes, nam
         except ValueError as e:
             print(e)
 
-def del_food_by_id(connection : Connection, id_food: int) -> None:
+def del_food_by_id(connection, id_food):
     """Delete a food with the id_food choosed
 
     Parameters

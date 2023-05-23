@@ -1,9 +1,7 @@
 import constants.constants as constants
-from sqlite3 import Connection
-from typing import Any
 
 
-def get_all_user(connection : Connection) -> list[Any]:
+def get_all_user(connection):
     """Get all the users registered in the database
 
     Parameters
@@ -25,7 +23,7 @@ def get_all_user(connection : Connection) -> list[Any]:
             print(e)
     return users
 
-def get_user_by_id(connection: Connection, reference: str) -> list[Any]:
+def get_user_by_id(connection, reference):
     """Get the user with the reference choosed
 
     Parameters
@@ -50,14 +48,7 @@ def get_user_by_id(connection: Connection, reference: str) -> list[Any]:
     return user
 
 
-def add_user(
-    connection : Connection, 
-    reference: str, 
-    name: str, 
-    gender: str, 
-    place_of_birth: str, 
-    place_of_residence: str
-) -> None:
+def add_user(connection, reference, name, gender,place_of_birth, place_of_residence):
     """Insert a new register in the table "user"
 
     Parameters
@@ -91,7 +82,7 @@ def add_user(
         except ValueError as e:
             print(e)
     
-def del_user_by_id(connection : Connection, reference : str) -> None:
+def del_user_by_id(connection, reference) -> None:
     """Delete a user with the reference choosed
 
     Parameters

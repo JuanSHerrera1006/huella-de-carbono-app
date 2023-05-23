@@ -1,6 +1,6 @@
 import controllers.food_controllers as controller
 
-def menu() -> None:
+def menu():
     """App food module menu
     
     Returns

@@ -7,7 +7,7 @@ import constants.constants as constants
 import os
 import io
 
-def image2blob() -> tuple[str, bytes]:
+def image2blob():
     """Ask to file explorer and get the bytes of the selected image
     
     Returns
@@ -38,7 +38,7 @@ def image2blob() -> tuple[str, bytes]:
     image_bytes = stream.getvalue()
     return ext, image_bytes
 
-def blob2image(image_bytes: bytes) -> Image.Image:
+def blob2image(image_bytes):
     """Convert the bytes of a image to class PIL.Image.Image
 
     Parameters
@@ -54,7 +54,7 @@ def blob2image(image_bytes: bytes) -> Image.Image:
     stream = io.BytesIO(image_bytes)
     return Image.open(stream)
 
-def save_image(img: Image.Image, image_name: str) -> None:
+def save_image(img, image_name):
     """Save the image in the path "ROOT_DIR\\assets\\image\\{image_name}.{ext}" of the project
 
     Parameters
@@ -73,7 +73,7 @@ def save_image(img: Image.Image, image_name: str) -> None:
     IMG_PATH = os.path.abspath(os.path.join(ROOT_DIR, DEST_PATH))
     img.save(IMG_PATH)
 
-def show_image(image_name: str) -> None:
+def show_image(image_name):
     """Show the image and its name 
 
     Parameters

@@ -1,11 +1,11 @@
 import constants.constants as constants
 import utils.path as path_functions
 import datetime as datetime
-from sqlite3 import connect, Connection
+from sqlite3 import connect
 import io
 import os
 
-def create_connection() -> Connection:
+def create_connection():
     """Returns the database connection 
  
     Returns
@@ -15,7 +15,7 @@ def create_connection() -> Connection:
     """
     return connect(constants.DB_NAME)
 
-def create_tables(connection : Connection) -> None:
+def create_tables(connection):
     """Create all tables to the app 
  
     Parameters

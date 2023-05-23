@@ -1,6 +1,6 @@
 import controllers.user_controllers as controller
 
-def menu() -> None:
+def menu():
     """App user menu
     
     Returns

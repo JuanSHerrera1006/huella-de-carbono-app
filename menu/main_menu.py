@@ -3,7 +3,7 @@ import menu.food_menu as food_menu
 import utils.co2_calculator as co2_calculator
 import database.database as database
 
-def menu() -> None:
+def menu():
     """App main menu
     
     Returns

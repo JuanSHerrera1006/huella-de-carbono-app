@@ -1,4 +1,4 @@
-def integer_input(msg: str, a: int, b: float) -> int:
+def integer_input(msg, a, b):
     """Function to validate if a integer is within a range (a, b)
     
     Parameters
@@ -25,7 +25,7 @@ def integer_input(msg: str, a: int, b: float) -> int:
             print(e)
 
 
-def real_input(msg: str, a: float, b: float) -> float:
+def real_input(msg, a, b):
     """Function to validate if a real is within a range (a, b)
     
     Parameters
@@ -51,7 +51,7 @@ def real_input(msg: str, a: float, b: float) -> float:
         except ValueError as e:
             print(e)
     
-def char_input(msg: str, valid_options: list[str] = ["M", "F"]) -> str:
+def char_input(msg, valid_options=["M", "F"]):
     """Function to validate if a value is on a list
     
     Parameters
@@ -76,7 +76,7 @@ def char_input(msg: str, valid_options: list[str] = ["M", "F"]) -> str:
         except ValueError as e:
             print(e)
 
-def numeric_input(msg: str) -> str:
+def numeric_input(msg):
     """Function to check if a value is numeric
 
     Parameters

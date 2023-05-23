@@ -1,4 +1,4 @@
-def show_table(data: list, header: tuple, max_text_view: int = 15) -> None:
+def show_table(data, header, max_text_view=15):
     """Format the data type table
 
     Parameters
@@ -50,7 +50,7 @@ def show_table(data: list, header: tuple, max_text_view: int = 15) -> None:
     final_table = table_header + table + down_header_part + "+"
     print(final_table)
 
-def show_list(data: list) -> None:
+def show_list(data):
     """Format the data type list
 
     Parameters
@@ -67,7 +67,7 @@ def show_list(data: list) -> None:
         print(f"{idx}.{value[1]}")
     print("") 
 
-def list_any2list_str(data: list) -> list:
+def list_any2list_str(data):
     """Convert all element of a matrix in type str
 
     Parameters
