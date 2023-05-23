@@ -15,7 +15,6 @@ def show_table(data: list, header: tuple, max_text_view: int = 15) -> None:
     -------
         None
     """
-
     # Variables to make the header
     top_header_part = ""
     middle_header_part = ""
@@ -67,5 +66,20 @@ def show_list(data: list) -> None:
     for idx, value in enumerate(data, start = 1):
         print(f"{idx}.{value[1]}")
     print("") 
+
+def list_any2list_str(data: list) -> list:
+    """Convert all element of a matrix in type str
+
+    Parameters
+    ----------
+        data: list
+            The matrix that will be transform
+
+    Returns
+    -------
+        ans: list
+            The matrix with all elements type str
+    """
+    return [[str(ele) for ele in item] for item in data]
 
 
