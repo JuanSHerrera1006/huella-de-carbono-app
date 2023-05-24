@@ -91,6 +91,51 @@ def show_all_users():
     # Close connection
     conn.close()
 
+
+def update_user_by_id(field):
+    # Create connection
+    conn = db.create_connection()
+    reference = input("Ingrese la identificacion del usuario a actualizar: ")
+    data = tbl_user.get_user_by_id(conn, reference)
+
+    if len(data) == 0:
+        print("No se encuentra ningun usuario registrado con esa identificacion")
+        input("Presione cualquier tecla para continuar...")
+        print()
+        return
+    
+    if field == constants.FIELDS_USER_TABLE["name"]:
+        # If the field is name
+        value = input("Ingrese el nuevo nombre del usuario: ").upper()
+    elif field == constants.FIELDS_USER_TABLE["gender"]:
+        # If the field is gender
+        value = validations.char_input("Ingrese el nuevo sexo del usuario: ")
+    elif field == constants.FIELDS_USER_TABLE["place_of_birth"]:
+        # If the field is place_of_birth
+        value = input("Ingrese el nuevo lugar de nacimiento del usuario: ").upper()
+    elif field == constants.FIELDS_USER_TABLE["place_of_residence"]:
+        # If the field is place_of_residence
+        value = input("Ingrese el nuevo lugar de residencia del usuario: ").upper()
+    else:
+        # If the field doesn't exist
+        print("Se ha enviado un campo no valido")
+        input("Presione cualquier tecla para continuar...")
+        print()
+        return
+
+    tbl_user.update_user_by_id(conn, field, value, reference)
+    updated_user = tbl_user.get_user_by_id(conn, reference)
+    
+    print("")
+    formats.show_table(updated_user, constants.HEADER_USER_TABLE)
+    print("")
+
+    input("Presione cualquier tecla para continuar...")
+    print()
+
+
+
+
 def del_user():
     """Delete user controller
 
@@ -108,7 +153,7 @@ def del_user():
         print()
         return
 
-    print("")
+    print("--- Usuarios registrados actualmente ---")
     formats.show_list(data)
     idx = validations.integer_input("Ingrese el indice del usuario a eliminar: ", 1, n)
     selected_user = data[idx - 1]

@@ -61,7 +61,7 @@ def show_all_foods():
         return
 
     final_data = formats.list_any2list_str(data)
-    print("")
+    print("--- Alimentos registrados actualmente ---")
     formats.show_list(final_data)
 
     opt = validations.char_input("¿Deseas saber mas informacion de algun alimento Y/N ?: ", ["Y", "N"])
@@ -115,8 +115,8 @@ def del_food():
         input("Presione cualquier tecla para continuar...")
         print()
         return
-
-    print("")
+ 
+    print("--- Alimentos registrados actualmente ---")
     final_data = formats.list_any2list_str(data)
     formats.show_list(final_data)
     idx = validations.integer_input("Ingrese el indice del alimento a eliminar: ", 1, n)

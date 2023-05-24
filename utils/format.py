@@ -62,7 +62,6 @@ def show_list(data):
     -------
         None
     """
-    print("--- Usuarios registrados actualmente ---")
     for idx, value in enumerate(data, start = 1):
         print(f"{idx}.{value[1]}")
     print("") 

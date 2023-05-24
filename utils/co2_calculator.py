@@ -20,6 +20,7 @@ def calculator():
         print("")
         return
 
+    print("--- Alimentos registrados actualmente ---")
     final_data = formats.list_any2list_str(data)
     print("")
     formats.show_list(final_data)

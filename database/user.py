@@ -1,6 +1,5 @@
 import constants.constants as constants
 
-
 def get_all_user(connection):
     """Get all the users registered in the database
 
@@ -19,6 +18,8 @@ def get_all_user(connection):
         try:
             cur = connection.cursor()
             users = cur.execute(constants.GET_ALL_USERS).fetchall()
+            # Close the cursor
+            cur.close()
         except ValueError as e:
             print(e)
     return users
@@ -43,6 +44,8 @@ def get_user_by_id(connection, reference):
         try:
             cur = connection.cursor()
             user = cur.execute(constants.GET_USER_BY_ID, (reference, )).fetchall()
+            # Close the cursor
+            cur.close()
         except ValueError as e:
             print(e)
     return user
@@ -81,8 +84,55 @@ def add_user(connection, reference, name, gender,place_of_birth, place_of_reside
             cur.close()
         except ValueError as e:
             print(e)
-    
-def del_user_by_id(connection, reference) -> None:
+
+def update_user_by_id(connection, field, value, reference):
+    """Update a user field with the reference choosed
+
+    Parameters
+    ----------
+        connection : Connection
+            The connection with the database
+        field : str
+            The field that will be change
+        value: Any
+            The new value to update in the database
+        reference : str
+            The ID of the user
+
+    Returns
+    -------
+        None
+    """
+    with connection:
+        try:
+            cur = connection.cursor()
+            params = (value, reference)
+
+            if constants.FIELDS_USER_TABLE["name"] == field:
+                cur.execute(constants.UPDATE_USER_NAME_BY_ID, params) 
+
+            elif constants.FIELDS_USER_TABLE["gender"] == field: 
+                cur.execute(constants.UPDATE_USER_GENDER_BY_ID, params) 
+                
+            elif constants.FIELDS_USER_TABLE["place_of_birth"] == field:
+                cur.execute(constants.UPDATE_USER_PLACE_OF_BIRTH_BY_ID, params) 
+                
+            elif constants.FIELDS_USER_TABLE["place_of_residence"] == field: 
+                cur.execute(constants.UPDATE_USER_PLACE_OF_RESIDENCE_BY_ID, params) 
+
+            else:
+                raise ValueError("No se ha ingresado un campo valido")
+
+            # Save the changes in the database
+            connection.commit()
+            # Close the cursor
+            cur.close()
+        except ValueError as e:
+            print(e)
+
+
+
+def del_user_by_id(connection, reference):
     """Delete a user with the reference choosed
 
     Parameters
@@ -106,4 +156,3 @@ def del_user_by_id(connection, reference) -> None:
             cur.close()
         except ValueError as e:
             print(e)
-

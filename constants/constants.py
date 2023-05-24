@@ -10,6 +10,13 @@ HEADER_FOOD_TABLE = ("id", "name", "co2_emmission", "create_at")
 # Header user table
 HEADER_USER_TABLE = ("reference", "name", "gender", "place_of_birth", "place_of_residence", "create_at")
 
+
+# Fields food table
+FIELDS_FOOD_TABLE = {
+    "name": "name",
+    "co2_emmission": "co2_emmission"
+}
+
 # Create food table SQL
 CREATE_FOOD_TABLE = """
 CREATE TABLE IF NOT EXISTS food(
@@ -19,6 +26,14 @@ CREATE TABLE IF NOT EXISTS food(
     create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 """
+
+# Fields user table
+FIELDS_USER_TABLE = {
+    "name": "name",
+    "gender": "gender",
+    "place_of_birth": "place_of_birth",
+    "place_of_residence": "place_of_residence"
+}
 
 # Create user table SQL
 CREATE_USER_TABLE = """
@@ -98,3 +113,10 @@ VALUES
 (?, ?, ?, ?, ?);
 """
 
+UPDATE_USER_NAME_BY_ID = "UPDATE user SET name = ? WHERE reference = ?"
+
+UPDATE_USER_GENDER_BY_ID = "UPDATE user SET gender = ? WHERE reference = ?"
+
+UPDATE_USER_PLACE_OF_BIRTH_BY_ID = "UPDATE user SET place_of_birth = ? WHERE reference = ?"
+
+UPDATE_USER_PLACE_OF_RESIDENCE_BY_ID = "UPDATE user SET place_of_residence = ? WHERE reference = ?"
