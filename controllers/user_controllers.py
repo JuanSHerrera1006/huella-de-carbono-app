@@ -91,13 +91,12 @@ def show_all_users():
     # Close connection
     conn.close()
 
-
 def update_user_by_id(field):
     # Create connection
     conn = db.create_connection()
     reference = input("Ingrese la identificacion del usuario a actualizar: ")
     data = tbl_user.get_user_by_id(conn, reference)
-
+ 
     if len(data) == 0:
         print("No se encuentra ningun usuario registrado con esa identificacion")
         input("Presione cualquier tecla para continuar...")

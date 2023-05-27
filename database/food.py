@@ -47,6 +47,78 @@ def get_img_food_by_id(connection, id_food, only_meta_data=True):
             print(e)
     return image
 
+def update_img_food_by_id(connection, id_food, image_bytes, img_name, ext):
+    """Update the food image by id
+
+    Parameters
+    ----------
+        connection : Connection
+            The connection with the database
+        id_food : int
+            The ID of the food
+        image_bytes : bytes
+            The new image in bytes to update in the database
+        img_name : str
+            The new image name
+        ext : str
+            The extension of the image
+    
+    Returns
+    -------
+        None
+    """
+    with connection:
+        try:
+            cur = connection.cursor()
+            params = (image_bytes, img_name, ext, id_food)
+            cur.execute(constants.UPDATE_IMAGE_BY_FOOD_ID, params)
+            # Save the changes in the database
+            connection.commit()
+            # Close the cursor
+            cur.close()
+        except ValueError as e:
+            print(e)
+
+def update_food_by_id(connection, field, value, id_food):
+    """Update a food field with the id choosed
+
+    Parameters
+    ----------
+        connection : Connection
+            The connection with the database
+        field : str
+            The field that will be change
+        value: Any
+            The new value to update in the database
+        food_id : str
+            The ID of the food
+
+    Returns
+    -------
+        None
+    """
+    with connection:
+        try:
+            cur = connection.cursor()
+            params = (value, id_food)
+
+            if constants.FIELDS_FOOD_TABLE["name"] == field:
+                cur.execute(constants.UPDATE_FOOD_NAME_BY_ID, params) 
+
+            elif constants.FIELDS_FOOD_TABLE["co2_emmission"] == field: 
+                cur.execute(constants.UPDATE_FOOD_CO2_EMMISSION_BY_ID, params) 
+
+            else:
+                raise ValueError("No se ha ingresado un campo valido")
+
+            # Save the changes in the database
+            connection.commit()
+            # Close the cursor
+            cur.close()
+        except ValueError as e:
+            print(e)
+
+
 
 def add_food(connection, name, co2_emmission):
     """Insert a new register in the table "food"

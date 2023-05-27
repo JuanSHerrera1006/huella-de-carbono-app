@@ -1,3 +1,4 @@
+from matplotlib import image
 import utils.validations as validations 
 import utils.images as img_functions
 import utils.csv as csv_functions
@@ -98,6 +99,83 @@ def show_all_foods():
             img_functions.show_image(img_name)
     # Close connection
     conn.close()
+
+def update_food_by_id(field):
+    conn = db.create_connection()
+    data = tbl_food.get_all_foods(conn)
+    n = len(data)
+
+    if n == 0:
+        print("No se encuentra ningun alimento registrado")
+        input("Presione cualquier tecla para continuar...")
+        print("")
+        return
+
+    final_data = formats.list_any2list_str(data)
+    print("--- Alimentos registrados actualmente ---")
+    formats.show_list(final_data)
+
+    idx = validations.integer_input("Digite el indice del alimento que desea actualizar su informacion: ", 1, n)
+    selected_food = final_data[idx - 1]
+    id_food = int(selected_food[0])
+
+    if field == constants.FIELDS_FOOD_TABLE["name"]:
+        # If the field is name
+        value = input("Ingrese el nuevo nombre del alimento: ").upper()
+        tbl_food.update_food_by_id(conn, field, value, id_food)
+        
+    elif field == constants.FIELDS_FOOD_TABLE["co2_emmission"]:
+        # If the field is emmission C02
+        value = validations.real_input("Ingrese el nuevo valor de co2 emitido por kg: ", 0, float('inf'))
+        tbl_food.update_food_by_id(conn, field, value, id_food)
+
+    elif field == "image":
+        # If the field is the image
+        img_meta_data = tbl_food.get_img_food_by_id(conn, id_food)
+
+        if len(img_meta_data) == 0:
+            print("No se encuentra ninguna imagen registrada para el alimento")
+            opt = validations.char_input("¿Deseas agregar una imagen Y/N?: ", ["Y", "N"])
+
+            if opt == "N":
+                print("Finalizando proceso")
+                input("Presione cualquier tecla para continuar...")
+                print()
+                return
+
+            name = selected_food[1] 
+            ext, image_bytes = img_functions.image2blob()
+            img_name = f"{name}_{id_food}{ext}"
+            tbl_food.add_food_img(conn, id_food, image_bytes, img_name, ext)
+
+            img = img_functions.blob2image(image_bytes)
+            img_functions.save_image(img, img_name)
+
+            print("Se ha registrado la imagen del alimento correctamente en la base de datos")
+            input("Presione cualquier tecla para continuar...")
+            print("")
+        else:
+            print("Seleccione la nueva imagen: ")
+            name = selected_food[1]
+            ext, image_bytes = img_functions.image2blob()
+            img_name = f"{name}_{id_food}{ext}"
+            tbl_food.update_img_food_by_id(conn, id_food, image_bytes, img_name, ext)
+
+            print("Se ha actualizado la imagen del alimento correctamente en la base de datos")
+            input("Presione cualquier tecla para continuar...")
+            print("")
+
+    else:
+        # If the field doesn't exist
+        print("Se ha enviado un campo no valido")
+        input("Presione cualquier tecla para continuar...")
+        print()
+        return
+
+    # Close connection
+    conn.close()
+
+
 
 def del_food():
     """Delete food controller

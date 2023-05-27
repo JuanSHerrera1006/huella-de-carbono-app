@@ -120,3 +120,9 @@ UPDATE_USER_GENDER_BY_ID = "UPDATE user SET gender = ? WHERE reference = ?"
 UPDATE_USER_PLACE_OF_BIRTH_BY_ID = "UPDATE user SET place_of_birth = ? WHERE reference = ?"
 
 UPDATE_USER_PLACE_OF_RESIDENCE_BY_ID = "UPDATE user SET place_of_residence = ? WHERE reference = ?"
+
+UPDATE_IMAGE_BY_FOOD_ID = "UPDATE image SET image = ?, name = ?, format = ? WHERE id_food = ?"
+
+UPDATE_FOOD_NAME_BY_ID = "UPDATE food SET name = ? WHERE id = ?"
+
+UPDATE_FOOD_CO2_EMMISSION_BY_ID = "UPDATE food SET co2_emmission = ? WHERE id = ?"

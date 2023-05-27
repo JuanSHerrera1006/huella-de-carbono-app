@@ -50,7 +50,6 @@ def get_user_by_id(connection, reference):
             print(e)
     return user
 
-
 def add_user(connection, reference, name, gender,place_of_birth, place_of_residence):
     """Insert a new register in the table "user"
 
