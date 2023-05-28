@@ -1,5 +1,20 @@
 import constants.constants as constants
 
+
+def get_all_records(connection):
+    record = [] 
+    with connection:
+        try:
+            cur = connection.cursor()
+            record = cur.execute(constants.GET_ALL_RECORDS).fetchall()
+            # Close cursor
+            cur.close()
+        except ValueError as e:
+            print(e)
+    return record
+
+
+
 def get_record(connection, reference, id_food):
     """Get the feeding record with the user reference and id_food
 
@@ -141,3 +156,28 @@ def del_record(connection, reference, id_food):
             cur.close()
         except ValueError as e:
             print(e)
+
+def get_highest_co2_emmission_by_gender(connection):
+    """Get the highest co2 emmission by gender
+
+    Parameters
+    ----------
+        connection : Connection
+            The connection with the database
+
+    Returns
+    -------
+        records : list[Any]
+            
+    """
+    records = [] 
+    with connection:
+        try:
+            cur = connection.cursor()
+            records = cur.execute(constants.GET_HIGHEST_CO2_EMMISSION_BY_GENDER).fetchall()
+            # Close cursor
+            cur.close()
+        except ValueError as e:
+            print(e)
+    return records
+

@@ -13,10 +13,21 @@ HEADER_USER_TABLE = ("reference", "name", "gender", "place_of_birth", "place_of_
 # Header record table
 HEADER_RECORD_TABLE = ("id_food", "food_name", "co2_food_emmission", "consumption_per_day", "total_emmission")
 
+# Header record table (include id_user)
+HEADER_RECORD_INCLUDE_USER_TABLE = ("id_food", "id_user", "food_name", "co2_food_emmission", "consumption_per_day", "total_emmission")
+
 # Fields food table
 FIELDS_FOOD_TABLE = {
     "name": "name",
     "co2_emmission": "co2_emmission"
+}
+
+# Fields user table
+FIELDS_USER_TABLE = {
+        "name": "name",
+        "gender": "gender",
+        "place_of_birth": "place_of_birth",
+        "place_of_residence": "place_of_residence"
 }
 
 # Create food table SQL
@@ -28,14 +39,6 @@ CREATE TABLE IF NOT EXISTS food(
     create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 """
-
-# Fields user table
-FIELDS_USER_TABLE = {
-    "name": "name",
-    "gender": "gender",
-    "place_of_birth": "place_of_birth",
-    "place_of_residence": "place_of_residence"
-}
 
 # Create user table SQL
 CREATE_USER_TABLE = """
@@ -83,7 +86,7 @@ CREATE TABLE IF NOT EXISTS image(
 """
 
 # Query to get all foods
-GET_ALL_FOODS = "SELECT * FROM food ORDER BY id ASC;"
+GET_ALL_FOODS = "SELECT * FROM food ORDER BY co2_emmission DESC;"
 
 # Query to get all users
 GET_ALL_USERS = "SELECT * FROM user ORDER BY reference ASC;"
@@ -106,22 +109,39 @@ GET_IMAGE_NAME_BY_ID = "SELECT name FROM image WHERE id_food = ?"
 # Query to get image by id_food
 GET_IMAGE_BY_ID = "SELECT * FROM image WHERE id_food = ?"
 
-# Query to get records
+# Query to get a record
 GET_RECORD = """
 SELECT 
-    F.id, F.name,
+    F.id,
+    F.name,
     F.co2_emmission,
     R.consumption_per_day, 
     (F.co2_emmission * R.consumption_per_day) AS total_emmission
 FROM record AS R
     INNER JOIN food AS F
         ON F.id = R.id_food
-WHERE id_user = ? AND id_food = ?"""
+WHERE id_user = ? AND id_food = ?
+"""
+
+# Query to get all records
+GET_ALL_RECORDS = """
+SELECT 
+    F.id,
+    R.id_user,
+    F.name,
+    F.co2_emmission,
+    R.consumption_per_day, 
+    (F.co2_emmission * R.consumption_per_day) AS total_emmission
+FROM record AS R
+    INNER JOIN food AS F
+        ON F.id = R.id_food
+"""
 
 # Query to get records by reference
 GET_RECORDS_BY_REFERENCE = """
 SELECT 
-    F.id, F.name,
+    F.id, 
+    F.name,
     F.co2_emmission,
     R.consumption_per_day, 
     (F.co2_emmission * R.consumption_per_day) AS total_emmission
@@ -169,3 +189,33 @@ UPDATE_FOOD_CO2_EMMISSION_BY_ID = "UPDATE food SET co2_emmission = ? WHERE id = 
 
 # Query to update the record consumption per day
 UPDATE_RECORD_CONSUMPTION = "UPDATE record SET consumption_per_day = ? WHERE id_user = ? AND id_food = ?"
+
+# Query to search top 5 users with the highest CO2 generation
+GET_TOP5_USER = """
+SELECT 
+	U.reference,
+	U.name,
+	U.gender,
+	SUM(F.co2_emmission * R.consumption_per_day) AS total_emmision
+FROM record AS R	
+    JOIN food AS F
+        ON F.id = R.id_food
+	JOIN user as U
+		ON u.reference = R.id_user
+GROUP BY U.reference
+ORDER BY total_emmision DESC
+LIMIT 5
+"""
+
+# Query to search highest CO2 generation by gender
+GET_HIGHEST_CO2_EMMISSION_BY_GENDER = """
+SELECT 
+	U.gender,
+	SUM(F.co2_emmission * R.consumption_per_day) AS total_emmision
+FROM record AS R	
+    JOIN food AS F
+        ON F.id = R.id_food
+	JOIN user as U
+		ON u.reference = R.id_user
+GROUP BY U.gender
+"""

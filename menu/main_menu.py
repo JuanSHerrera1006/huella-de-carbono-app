@@ -1,5 +1,6 @@
 import menu.food_menu as food_menu
 import menu.user_menu as user_menu
+import menu.report_menu as report_menu
 import menu.record_menu as record_menu
 import utils.co2_calculator as co2_calculator
 import database.database as database
@@ -35,7 +36,7 @@ def menu():
         elif userInput == '4':
             co2_calculator.calculator()
         elif userInput == '5':
-            pass
+            report_menu.menu()
         elif userInput == '6':
             database.create_backup()
         else:

@@ -155,3 +155,28 @@ def del_user_by_id(connection, reference):
             cur.close()
         except ValueError as e:
             print(e)
+
+def get_top5_user(connection):
+    """Get top 5 user with the highest CO2 generation per day
+
+    Parameters
+    ----------
+        connection: Connection
+            The connection with the database
+
+    Returns
+    -------
+        users: list[Any]
+            List with the users registered in the database. Return an empty list if the query failed
+    """
+    users = [] 
+    with connection:
+        try:
+            cur = connection.cursor()
+            users = cur.execute(constants.GET_TOP5_USER).fetchall()
+            # Close the cursor
+            cur.close()
+        except ValueError as e:
+            print(e)
+    return users
+

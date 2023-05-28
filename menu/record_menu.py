@@ -15,11 +15,12 @@ def menu():
     2) Ver todos los registros de un usuario
     3) Actualizar un registro
     4) Eliminar un registro
-    5) Exit
+    5) Crear archivo .csv
+    6) Exit
 
     La opcion que has elegido es: """
 
-    while (userInput := input(MENU_PROMPT)) != '5':
+    while (userInput := input(MENU_PROMPT)) != '6':
         if userInput == '1':
             controller.register_record()
         elif userInput == '2':
@@ -28,6 +29,8 @@ def menu():
             controller.update_record()
         elif userInput == '4':
             controller.del_record()
+        elif userInput == '5':
+            controller.create_csv_file()
         else:
             print('Has ingresado una opcion no valida')
 

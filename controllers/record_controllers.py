@@ -2,9 +2,11 @@ import database.database as db
 import constants.constants as constants
 import utils.validations as validations
 import utils.format as formats
+import utils.csv as csv_functions
 import database.record as tbl_record
 import database.user as tbl_user
 import database.food as tbl_food
+import datetime
 
 def register_record():
     """Register new record controller
@@ -178,3 +180,29 @@ def del_record():
     # Close connection
     conn.close()
 
+def create_csv_file():
+    """Create csv with all records data controller
+
+    Returns
+    -------
+        None
+    """
+    conn = db.create_connection()
+    data = tbl_record.get_all_records(conn)
+
+    if len(data) == 0:
+        print("No se encuentra ningun alimento registrado")
+        input("Presione cualquier tecla para continuar...")
+        print()
+        return
+    
+    today = datetime.date.today()
+    file_name = f'records_{today}.csv'
+
+    csv_functions.create_csv(file_name, constants.HEADER_RECORD_INCLUDE_USER_TABLE, data)
+    print(f"Se ha almacenado exitosamente el archivo en ROOT_DIR\\csv_data\\{file_name}")
+    input("Presiona cualquier tecla para continuar...")
+    print("")
+
+    # Close connection
+    conn.close()
