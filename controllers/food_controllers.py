@@ -101,6 +101,12 @@ def show_all_foods():
     conn.close()
 
 def update_food_by_id(field):
+    """Update food by id controller
+
+    Returns
+    -------
+        None
+    """
     conn = db.create_connection()
     data = tbl_food.get_all_foods(conn)
     n = len(data)

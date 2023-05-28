@@ -37,6 +37,7 @@ def menu():
         else:
             print('Has ingresado una opcion no valida')
 
+
 def submenu_user_update():
     """App submenu user to update the fields
     
